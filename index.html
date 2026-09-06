@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papaty cafe Specialty Coffee | มินิมอลอบอุ่น สัมผัสรสชาติกาแฟคราฟต์</title>
+    <!-- Google Fonts Setup -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================
+           1. CSS VARIABLES & RESET
+           ========================================== */
+        :root {
+            /* Palette สีกาแฟโทนอบอุ่น */
+            --bg-color: #FAF6F0;            /* Warm White / Paper */
+            --card-bg: #F3ECE1;             /* Light Latte Cream */
+            --primary-dark: #2C1E16;        /* Dark Espresso */
+            --accent-warm: #8C6239;         /* Medium Roasted Coffee */
+            --accent-light: #D9C3B0;        /* Soft Milk Foam */
+            --text-main: #3D2E24;           /* Warm Charcoal Brown */
+            --text-muted: #7A685B;          /* Soft Muted Brown */
+            --white: #FFFFFF;
+            
+            /* Typography */
+            --font-serif: 'Playfair Display', serif, Georgia;
+            --font-sans: 'Kanit', sans-serif;
+            
+            /* Transitions & Effects */
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow-sm: 0 4px 12px rgba(44, 30, 22, 0.05);
+            --shadow-md: 0 8px 24px rgba(44, 30, 22, 0.08);
+            --radius-sm: 8px;
+            --radius-lg: 16px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            font-weight: 300;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ==========================================
+           2. UTILITIES & REUSABLE LAYOUT
+           ========================================== */
+        .container {
+            width: 90%;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px auto;
+        }
+
+        .section-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            color: var(--accent-warm);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 500;
+            color: var(--primary-dark);
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-warm);
+            margin: 16px auto 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-dark);
+            color: var(--bg-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-warm);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            border-color: var(--primary-dark);
+            color: var(--primary-dark);
+            background-color: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-dark);
+            color: var(--bg-color);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================
+           3. HEADER & NAVIGATION
+           ========================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(250, 246, 240, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(217, 195, 176, 0.3);
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--accent-warm);
+            font-size: 1rem;
+            font-family: var(--font-sans);
+            font-weight: 300;
+            display: block;
+            margin-top: -6px;
+            letter-spacing: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-main);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-warm);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Responsive Mobile Menu Toggle */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 2px;
+            background-color: var(--primary-dark);
+            transition: var(--transition);
+        }
+
+        /* ==========================================
+           4. HERO SECTION
+           ========================================== */
+        .hero {
+            padding-top: 160px;
+            padding-bottom: 100px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            line-height: 1.15;
+            color: var(--primary-dark);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--accent-warm);
+        }
+
+        .hero-description {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            max-width: 480px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .hero-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            background-color: var(--card-bg);
+            padding: 20px 24px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--accent-light);
+            box-shadow: var(--shadow-sm);
+            max-width: 200px;
+        }
+
+        .hero-badge-title {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+
+        .hero-badge-sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================
+           5. SPECIALTY BEANS SECTION
+           ========================================== */
+        .beans-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .bean-card {
+            background-color: var(--card-bg);
+            padding: 36px 28px;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(217, 195, 176, 0.4);
+            transition: var(--transition);
+        }
+
+        .bean-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-warm);
+        }
+
+        .bean-origin {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-warm);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .bean-name {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+        }
+
+        .bean-notes {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .bean-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .bean-tag {
+            background-color: var(--bg-color);
+            color: var(--primary-dark);
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        /* ==========================================
+           6. MENU SECTION (WITH TABS)
+           ========================================== */
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--text-muted);
+            padding: 8px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .tab-btn.active {
+            color: var(--primary-dark);
+            border-bottom-color: var(--accent-warm);
+            font-weight: 500;
+        }
+
+        .menu-category-content {
+            display: none;
+        }
+
+        .menu-category-content.active {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .menu-item {
+            background-color: var(--white);
+            padding: 24px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .menu-img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            flex-shrink: 0;
+        }
+
+        .menu-details {
+            flex-grow: 1;
+        }
+
+        .menu-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+        }
+
+        .menu-name {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .menu-price {
+            color: var(--accent-warm);
+            font-weight: 500;
+            font-size: 1.05rem;
+        }
+
+        .menu-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================
+           7. GALLERY / ATMOSPHERE
+           ========================================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 280px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+
+        /* ==========================================
+           8. LOCATION & INFO SECTION
+           ========================================== */
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid rgba(217, 195, 176, 0.4);
+        }
+
+        .location-info {
+            padding: 60px;
+        }
+
+        .info-group {
+            margin-bottom: 30px;
+        }
+
+        .info-title {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+
+        .info-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .map-placeholder {
+            background-color: var(--accent-light);
+            width: 100%;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark);
+            font-family: var(--font-serif);
+            font-style: italic;
+        }
+
+        /* ==========================================
+           9. FOOTER
+           ========================================== */
+        .footer {
+            background-color: var(--primary-dark);
+            color: var(--accent-light);
+            padding: 60px 0 30px 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--bg-color);
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 30px;
+            list-style: none;
+        }
+
+        .footer-link {
+            font-size: 0.85rem;
+            color: var(--accent-light);
+        }
+
+        .footer-link:hover {
+            color: var(--white);
+        }
+
+        .footer-copyright {
+            font-size: 0.8rem;
+            color: rgba(217, 195, 176, 0.5);
+            border-top: 1px solid rgba(217, 195, 176, 0.1);
+            padding-top: 24px;
+        }
+
+        /* ==========================================
+           10. RESPONSIVE DESIGN (MEDIA QUERIES)
+           ========================================== */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            .beans-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-color);
+                flex-direction: column;
+                padding: 30px;
+                gap: 20px;
+                border-bottom: 1px solid var(--accent-light);
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-badge {
+                bottom: 10px;
+                left: 10px;
+            }
+
+            .beans-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-category-content.active {
+                grid-template-columns: 1fr;
+            }
+
+            .location-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .location-info {
+                padding: 40px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR HEADER -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                AURA
+                <span>SPECIALTY COFFEE</span>
+            </a>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about" class="nav-link">เรื่องราวของเรา</a></li>
+                <li><a href="#beans" class="nav-link">เมล็ดกาแฟ</a></li>
+                <li><a href="#menu" class="nav-link">เมนูแนะนำ</a></li>
+                <li><a href="#gallery" class="nav-link">บรรยากาศ</a></li>
+                <li><a href="#location" class="nav-link">พิกัดร้าน</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="about">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1 class="hero-title">สัมผัสรสชาติอันพิถีพิถัน จาก <em>Specialty Coffee</em></h1>
+                    <p class="hero-description">
+                        เราเชื่อว่ากาแฟทุกแก้วมีเรื่องราว AURA คัดสรรเมล็ดกาแฟ Single Origin คุณภาพสูง คั่วอย่างพิถีพิถัน เพื่อให้คุณได้ดื่มด่ำกับกลิ่นและรสชาติที่เป็นเอกลักษณ์ในบรรยากาศอบอุ่นเป็นกันเอง
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#menu" class="btn btn-primary">ดูเมนูกาแฟ</a>
+                        <a href="#location" class="btn btn-outline">ค้นหาร้าน</a>
+                    </div>
+                </div>
+                <div class="hero-image-wrapper">
+                    <!-- Placeholder Image for Main Coffee Pour -->
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80" alt="กาแฟดริป Specialty Coffee ในบรรยากาศร้านอบอุ่น" class="hero-image">
+                    <div class="hero-badge">
+                        <div class="hero-badge-title">100% Handcrafted</div>
+                        <div class="hero-badge-sub">คั่วใหม่และดริปสดแบบแก้วต่อแก้ว</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPECIALTY BEANS SECTION -->
+    <section class="section" id="beans" style="background-color: rgba(243, 236, 225, 0.4);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Our Selection</span>
+                <h2 class="section-title">เมล็ดกาแฟไฮไลต์ประจำเดือน</h2>
+            </div>
+
+            <div class="beans-grid">
+                <!-- Bean 1 -->
+                <div class="bean-card">
+                    <span class="bean-origin">ETHIOPIA YIRGACHEFFE</span>
+                    <h3 class="bean-name">Floral & Jasmine Note</h3>
+                    <p class="bean-notes">ให้ความรู้สึกสดชื่น กลิ่นหอมหวานดอกมะลิ และความเปรี้ยวอมหวานแบบพีชและเบอร์รี่</p>
+                    <div class="bean-tags">
+                        <span class="bean-tag">Light Roast</span>
+                        <span class="bean-tag">Washed Process</span>
+                    </div>
+                </div>
+
+                <!-- Bean 2 -->
+                <div class="bean-card">
+                    <span class="bean-origin">COLOMBIA GEISHA</span>
+                    <h3 class="bean-name">Tropical & Bergamot</h3>
+                    <p class="bean-notes">รสสัมผัสซับซ้อน อบอวลด้วยกลิ่นส้มเบอร์กามอท ชาน้ำผึ้ง และทรายจากทรอปิคอล</p>
+                    <div class="bean-tags">
+                        <span class="bean-tag">Light Roast</span>
+                        <span class="bean-tag">Anaerobic Natural</span>
+                    </div>
+                </div>
+
+                <!-- Bean 3 -->
+                <div class="bean-card">
+                    <span class="bean-origin">NAN, THAILAND</span>
+                    <h3 class="bean-name">Chocolate & Hazelnut</h3>
+                    <p class="bean-notes">เมล็ดไทยท้องถิ่น ให้บอดี้เข้มข้น รสชาติช็อกโกแลต ถั่วเฮเซลนัท และความหวานปลายแบบน้ำตาลอ้อย</p>
+                    <div class="bean-tags">
+                        <span class="bean-tag">Medium Roast</span>
+                        <span class="bean-tag">Honey Process</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU SECTION WITH INTERACTIVE TABS -->
+    <section class="section" id="menu">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Crafted Beverage</span>
+                <h2 class="section-title">เมนูเครื่องดื่มแนะนำ</h2>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="menu-tabs">
+                <button class="tab-btn active" onclick="switchTab(event, 'drip')">Filter / Drip</button>
+                <button class="tab-btn" onclick="switchTab(event, 'espresso')">Espresso Bar</button>
+                <button class="tab-btn" onclick="switchTab(event, 'bakery')">Bakery Pairings</button>
+            </div>
+
+            <!-- Tab 1: Drip Coffee -->
+            <div id="drip" class="menu-category-content active">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=300&q=80" alt="Single Origin Filter Coffee" class="menu-img">
+                    <div class="menu-details">
+                        <div class="menu-title-row">
+                            <h3 class="menu-name">Single Origin Filter</h3>
+                            <span class="menu-price">160.-</span>
+                        </div>
+                        <p class="menu-desc">กาแฟดริปพิถีพิถัน สามารถเลือกเมล็ดตาม Taste Note ที่ชื่นชอบได้</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=300&q=80" alt="Craft Cold Brew" class="menu-img">
+                    <div class="menu-details">
+                        <div class="menu-title-row">
+                            <h3 class="menu-name">Signature Cold Brew</h3>
+                            <span class="menu-price">140.-</span>
+                        </div>
+                        <p class="menu-desc">กาแฟสกัดเย็น 16 ชั่วโมง ให้ความนุ่มนวล รสสัมผัสละมุน ดื่มง่าย</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Espresso Bar -->
+            <div id="espresso" class="menu-category-content">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=300&q=80" alt="Dirty Coffee" class="menu-img">
+                    <div class="menu-details">
+                        <div class="menu-title-row">
+                            <h3 class="menu-name">AURA Dirty</h3>
+                            <span class="menu-price">130.-</span>
+                        </div>
+                        <p class="menu-desc">นมสูตรพิเศษแช่เย็นจัด ท็อปด้วยช็อตเอสเปรสโซเข้มข้น รสชาติกลมกล่อม</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=300&q=80" alt="Flat White" class="menu-img">
+                    <div class="menu-details">
+                        <div class="menu-title-row">
+                            <h3 class="menu-name">Flat White</h3>
+                            <span class="menu-price">110.-</span>
+                        </div>
+                        <p class="menu-desc">เอสเปรสโซเข้มข้นผสมกับสตรีมนมอุ่นๆ ฟองนมนุ่มละเอียดพอดีคำ</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3: Bakery -->
+            <div id="bakery" class="menu-category-content">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=300&q=80" alt="Butter Croissant" class="menu-img">
+                    <div class="menu-details">
+                        <div class="menu-title-row">
+                            <h3 class="menu-name">Plain Butter Croissant</h3>
+                            <span class="menu-price">85.-</span>
+                        </div>
+                        <p class="menu-desc">ครัวซองต์เนยสดฝรั่งเศส อบใหม่ทุกเช้า หอมเนย หูกรอบนอกนุ่มใน</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=300&q=80" alt="Sourdough Toast" class="menu-img">
+                    <div class="menu-details">
+                        <div class="menu-title-row">
+                            <h3 class="menu-name">Honey Butter Sourdough</h3>
+                            <span class="menu-price">120.-</span>
+                        </div>
+                        <p class="menu-desc">ขนมปังซาวโดว์เสิร์ฟพร้อมเนยสดแท้และน้ำผึ้งดอกไม้ป่าธรรมชาต</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ATMOSPHERE GALLERY -->
+    <section class="section" id="gallery" style="background-color: rgba(243, 236, 225, 0.4);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Space & Space</span>
+                <h2 class="section-title">บรรยากาศภายในร้าน</h2>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=600&q=80" alt="มุมเคาน์เตอร์กาแฟสไตล์มินิมอล" class="gallery-img">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80" alt="ที่นั่งติดหน้าต่างรับแสงธรรมชาติ" class="gallery-img">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80" alt="การบดและเตรียมเมล็ดกาแฟ" class="gallery-img">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=600&q=80" alt="โซนที่นั่งบรรยากาศอบอุ่นโทนไม้" class="gallery-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION & INFO -->
+    <section class="section" id="location">
+        <div class="container">
+            <div class="location-grid">
+                <div class="location-info">
+                    <span class="section-subtitle">Visit Us</span>
+                    <h2 class="section-title" style="margin-bottom: 30px; text-align: left;">ข้อมูลและการเดินทาง</h2>
+
+                    <div class="info-group">
+                        <h3 class="info-title">เวลาเปิด - ปิด</h3>
+                        <p class="info-text">จันทร์ - ศุกร์ : 07:30 - 17:00 น.</p>
+                        <p class="info-text">เสาร์ - อาทิตย์ : 08:30 - 18:00 น.</p>
+                    </div>
+
+                    <div class="info-group">
+                        <h3 class="info-title">สถานที่ตั้ง</h3>
+                        <p class="info-text">123/4 ถนนสุขุมวิท แขวงคลองเตยเหนือ เขตวัฒนา กรุงเทพมหานคร 10110</p>
+                        <p class="info-text" style="margin-top: 4px;">(มีที่จอดรถด้านหลังร้าน)</p>
+                    </div>
+
+                    <div class="info-group">
+                        <h3 class="info-title">ติดต่อเรา</h3>
+                        <p class="info-text">โทร: 081-234-5678</p>
+                        <p class="info-text">Instagram: @aura.specialtycoffee</p>
+                        <p class="info-text">Line: @auracoffee</p>
+                    </div>
+                </div>
+
+                <!-- Simulated Map Box -->
+                <div class="map-placeholder">
+                    [Google Maps Embed Space]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">AURA</div>
+            <ul class="footer-links">
+                <li><a href="#about" class="footer-link">เรื่องราวของเรา</a></li>
+                <li><a href="#beans" class="footer-link">เมล็ดกาแฟ</a></li>
+                <li><a href="#menu" class="footer-link">เมนูแนะนำ</a></li>
+                <li><a href="#location" class="footer-link">การเดินทาง</a></li>
+            </ul>
+            <div class="footer-copyright">
+                &copy; 2026 AURA Specialty Coffee. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- LIGHTWEIGHT INTERACTION JAVASCRIPT -->
+    <script>
+        // Toggle Mobile Menu
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close Mobile Menu on link click
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Menu Tabs Switcher Logic
+        function switchTab(event, categoryId) {
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.menu-category-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Activate target tab & content
+            event.currentTarget.classList.add('active');
+            document.getElementById(categoryId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
